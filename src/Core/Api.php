@@ -54,7 +54,7 @@ class Api extends AbstractAPI
     /**
      * @throws GuzzleException
      */
-    private function request(string $uri, string $method, $params)
+    private function request(string $uri, string $method, array $params, array $files)
     {
 
         $sysParams = [
@@ -71,11 +71,22 @@ class Api extends AbstractAPI
 
         $option = [];
         if ($method === 'POST') {
-            $query = http_build_query($sysParams);
-            $option['form_params'] = $params;
+            $multipart = [];
+
+            foreach (array_merge($params, $files) as $key => $param) {
+                $multipart[] = [
+                    'name' => $key,
+                    'content' => $param
+                ];
+            }
+
+            $option['multipart'] = $multipart;
+
+            $build = $sysParams;
         } else {
-            $query = http_build_query(array_merge($sysParams, $params));
+            $build = array_merge($sysParams, $params);
         }
+        $query = http_build_query($build);
 
         $client = new HttpClient([
             'base_uri' => self::API_URL,
@@ -108,12 +119,15 @@ class Api extends AbstractAPI
      */
     protected function post($uri, array $params = [])
     {
-        return $this->request($uri, 'POST', $params);
+        return $this->request($uri, 'POST', $params, []);
     }
 
-    protected function upload()
+    /**
+     * @throws GuzzleException
+     */
+    protected function upload($uri, array $params)
     {
-
+        return $this->request($uri, 'POST', [], $params);
     }
 
     /**
