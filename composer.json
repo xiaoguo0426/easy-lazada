@@ -3,7 +3,7 @@
     "description": "Package description here.",
     "license": "MIT",
     "require": {
-        "hanson/foundation-sdk": "3.0.*"
+        "hanson/foundation-sdk": "5.0.*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"

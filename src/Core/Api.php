@@ -52,9 +52,15 @@ class Api extends AbstractAPI
     }
 
     /**
+     * @param string $uri
+     * @param string $method
+     * @param array $params
+     * @param array $files
      * @throws GuzzleException
+     * @throws \JsonException
+     * @return array
      */
-    private function request(string $uri, string $method, array $params, array $files)
+    private function request(string $uri, string $method, array $params, array $files): array
     {
 
         $sysParams = [
@@ -97,35 +103,41 @@ class Api extends AbstractAPI
         ]);
         $res = $client->request($method, $uri, $option);
 
-        return json_decode($res->getBody()->getContents(), true);
+        return json_decode($res->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
      * @param $uri
      * @param array $params
      * @throws GuzzleException
-     * @return mixed
+     * @throws \JsonException
+     * @return array
      */
-    protected function get($uri, array $params = [])
+    protected function get($uri, array $params = []): array
     {
-        return $this->request($uri, 'GET', $params);
+        return $this->request($uri, 'GET', $params, []);
     }
 
     /**
      * @param $uri
      * @param array $params
      * @throws GuzzleException
-     * @return mixed
+     * @throws \JsonException
+     * @return array
      */
-    protected function post($uri, array $params = [])
+    protected function post($uri, array $params = []): array
     {
         return $this->request($uri, 'POST', $params, []);
     }
 
     /**
+     * @param $uri
+     * @param array $params
      * @throws GuzzleException
+     * @throws \JsonException
+     * @return array
      */
-    protected function upload($uri, array $params)
+    protected function upload($uri, array $params): array
     {
         return $this->request($uri, 'POST', [], $params);
     }
@@ -143,7 +155,6 @@ class Api extends AbstractAPI
         foreach ($params as $k => $v) {
             $stringToBeSigned .= "$k$v";
         }
-        unset($k, $v);
         return strtoupper($this->hmac_sha256($stringToBeSigned, $this->app_secret));
     }
 
