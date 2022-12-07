@@ -514,9 +514,9 @@ class Product extends Api
         $uri = '/image/upload';
 
         $params = [
-            'image' => $image,
+            'image' => fopen($image, 'rb')
         ];
 
-//        return $this->upload($uri, $params);
+        return $this->upload($uri, $params);
     }
 }
