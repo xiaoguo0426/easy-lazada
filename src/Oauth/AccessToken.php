@@ -29,8 +29,8 @@ class AccessToken extends AbstractAccessToken
         $this->tokenJsonKey = 'access_token';
         $this->expiresJsonKey = 'expires_in';
 
-        $this->cacheKey = 'lza-access::';
-        $this->cacheRefreshKey = 'lza-refresh-access::';
+        $this->cacheKey = 'lza-access::' . $app_key . '::';
+        $this->cacheRefreshKey = 'lza-refresh-access::' . $app_key . '::';
 
         $this->setAppId($app_key);
         $this->setSecret($app_secret);
