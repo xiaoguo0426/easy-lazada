@@ -10,6 +10,11 @@ class Api extends AbstractAPI
 {
 
     /**
+     * @var
+     */
+    private $region;
+
+    /**
      * @var string
      */
     private $app_key;
@@ -35,6 +40,18 @@ class Api extends AbstractAPI
     /**
      * @throws GuzzleException
      */
+
+    public function __construct($region, $app_key, $app_secret, $debug, $sandbox)
+    {
+        $this->region = $region;
+        $this->app_key = $app_key;
+        $this->app_secret = $app_secret;
+        $this->sign_method = 'sha256';
+
+        $this->debug = $debug;
+        $this->sandbox = $sandbox;
+    }
+
     public function request(string $uri, string $method, $params)
     {
 
@@ -70,16 +87,6 @@ class Api extends AbstractAPI
         return json_decode($res->getBody()->getContents(), true);
     }
 
-    public function __construct($app_key, $app_secret, $debug, $sandbox)
-    {
-        $this->app_key = $app_key;
-        $this->app_secret = $app_secret;
-        $this->sign_method = 'sha256';
-
-        $this->debug = $debug;
-        $this->sandbox = $sandbox;
-    }
-
     public function get($uri, $params)
     {
         return $this->request($uri, 'GET', $params);
@@ -111,10 +118,5 @@ class Api extends AbstractAPI
     {
         [$millisecond, $second] = explode(' ', microtime());
         return $second . '000';
-    }
-
-    public function middlewares()
-    {
-
     }
 }

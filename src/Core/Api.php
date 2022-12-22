@@ -6,6 +6,7 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use Hanson\Foundation\AbstractAPI;
 use Hanson\Foundation\Exception\HttpException;
+use Onetech\EasyLazada\Marketplace;
 use Onetech\EasyLazada\Oauth\AccessToken;
 
 class Api extends AbstractAPI
@@ -37,10 +38,14 @@ class Api extends AbstractAPI
 
     private $sdk_version = 'lazop-sdk-php-20180422';
 
-    public const API_URL = 'https://api.lazada.co.th/';
+    private $domain;
 
-    public function __construct(AccessToken $accessToken)
+    /**
+     * @throws \Onetech\EasyLazada\Exception\InvalidArgumentException
+     */
+    public function __construct(string $region, AccessToken $accessToken)
     {
+        $this->checkRegion($region);
 
         $this->app_key = $accessToken->getAppId();
         $this->app_secret = $accessToken->getSecret();
@@ -50,6 +55,15 @@ class Api extends AbstractAPI
         $this->debug = $accessToken->getDebug();
         $this->sandbox = $accessToken->getSandbox();
     }
+
+    /**
+     * @throws \Onetech\EasyLazada\Exception\InvalidArgumentException
+     */
+    private function checkRegion(string $region)
+    {
+        $this->domain = Marketplace::fromCountry($region)->url();
+    }
+
 
     /**
      * @param string $uri
@@ -71,9 +85,7 @@ class Api extends AbstractAPI
             'partner_id' => $this->sdk_version
         ];
 
-        $sysParams['sign'] = $this->signature($uri, array_merge($params, $sysParams));
-
-        $uri = '/rest' . $uri;
+        $sysParams['sign'] = $this->signature('/' . $uri, array_merge($params, $sysParams));
 
         $option = [];
         if ($method === 'POST') {
@@ -95,7 +107,7 @@ class Api extends AbstractAPI
         $query = http_build_query($build);
 
         $client = new HttpClient([
-            'base_uri' => self::API_URL,
+            'base_uri' => $this->domain,
             'query' => $query,
             'headers' => [
                 'User-Agent' => $this->sdk_version

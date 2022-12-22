@@ -8,14 +8,14 @@ class Product extends Api
 {
     /**
      * 增加或减少一种或多种现有产品的可销售数量
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/stock/sellable/adjust
+     * @document https://open.lazada.com/apps/doc/api?path=/product/stock/sellable/adjust
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function adjustSellableQuantity(string $payload)
     {
-        $uri = '/product/stock/sellable/adjust';
+        $uri = 'product/stock/sellable/adjust';
 
         $params = [
             'payload' => $payload
@@ -26,14 +26,14 @@ class Product extends Api
 
     /**
      * 创建单个新产品
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/create
+     * @document https://open.lazada.com/apps/doc/api?path=/product/create
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function createProduct(string $payload)
     {
-        $uri = '/product/create';
+        $uri = 'product/create';
 
         $params = [
             'payload' => $payload
@@ -44,13 +44,13 @@ class Product extends Api
 
     /**
      * 停用产品或产品对应的 SKU
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/deactivate
+     * @document https://open.lazada.com/apps/doc/api?path=/product/deactivate
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function deactivateProduct(string $apiRequestBody)
     {
-        $uri = '/product/deactivate';
+        $uri = 'product/deactivate';
 
         $params = [
             'apiRequestBody' => $apiRequestBody
@@ -61,7 +61,7 @@ class Product extends Api
 
     /**
      * 退出产品实验
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/products/experiment/exit
+     * @document https://open.lazada.com/apps/doc/api?path=/products/experiment/exit
      * @param string $imageUrl
      * @param string $startDate
      * @param string $endDate
@@ -74,7 +74,7 @@ class Product extends Api
      */
     public function exitExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture)
     {
-        $uri = '/products/experiment/exit';
+        $uri = 'products/experiment/exit';
 
         $params = [
             'imageUrl' => $imageUrl,
@@ -91,7 +91,7 @@ class Product extends Api
 
     /**
      * 获取实验数据统计
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/products/experiment/getdata
+     * @document https://open.lazada.com/apps/doc/api?path=/products/experiment/getdata
      * @param int $productId
      * @param int $sellerId
      * @param string $expType
@@ -104,7 +104,7 @@ class Product extends Api
      */
     public function getImageExperimentData(int $productId, int $sellerId, string $expType, string $venture, string $imageUrl, string $startDate, string $endDate)
     {
-        $uri = '/products/experiment/getdata';
+        $uri = 'products/experiment/getdata';
 
         $params = [
             'payload' => $productId,
@@ -121,7 +121,7 @@ class Product extends Api
 
     /**
      * 系统中按页面索引检索所有产品品牌
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/category/brands/query
+     * @document https://open.lazada.com/apps/doc/api?path=/category/brands/query
      * @param string $startRow
      * @param string $pageSize
      * @param string $languageCode
@@ -130,7 +130,7 @@ class Product extends Api
      */
     public function getBrandByPages(string $startRow, string $pageSize, string $languageCode)
     {
-        $uri = '/category/brands/query';
+        $uri = 'category/brands/query';
 
         $params = [
             'startRow' => $startRow,
@@ -143,7 +143,7 @@ class Product extends Api
 
     /**
      * 获取指定产品类别的属性列表
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/category/attributes/get
+     * @document https://open.lazada.com/apps/doc/api?path=/category/attributes/get
      * @param string $primary_category_id
      * @param string $language_code
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -151,7 +151,7 @@ class Product extends Api
      */
     public function getCategoryAttributes(string $primary_category_id, string $language_code)
     {
-        $uri = '/category/attributes/get';
+        $uri = 'category/attributes/get';
 
         $params = [
             'primary_category_id' => $primary_category_id,
@@ -163,14 +163,14 @@ class Product extends Api
 
     /**
      * 通过产品标题获取产品的类别建议
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/category/suggestion/get
+     * @document https://open.lazada.com/apps/doc/api?path=/product/category/suggestion/get
      * @param string $product_name
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getCategorySuggestion(string $product_name)
     {
-        $uri = '/product/category/suggestion/get';
+        $uri = 'product/category/suggestion/get';
 
         $params = [
             'product_name' => $product_name
@@ -187,7 +187,7 @@ class Product extends Api
      */
     public function getCategoryTree(string $language_code)
     {
-        $uri = '/category/tree/get';
+        $uri = 'category/tree/get';
 
         $params = [
             'language_code' => $language_code
@@ -198,7 +198,7 @@ class Product extends Api
 
     /**
      * 通过 ItemId 或 SellerSku 获取单品
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/item/get
+     * @document https://open.lazada.com/apps/doc/api?path=/product/item/get
      * @param string $item_id
      * @param string $seller_sku
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -206,7 +206,7 @@ class Product extends Api
      */
     public function getProductItem(string $item_id, string $seller_sku)
     {
-        $uri = '/product/item/get';
+        $uri = 'product/item/get';
 
         $params = [
             'item_id' => $item_id,
@@ -218,7 +218,7 @@ class Product extends Api
 
     /**
      * 获取指定产品的详细信息
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/products/get
+     * @document https://open.lazada.com/apps/doc/api?path=/products/get
      * @param string $filter
      * @param string $update_before
      * @param string $create_before
@@ -233,7 +233,7 @@ class Product extends Api
      */
     public function getProducts(string $filter, string $update_before, string $create_before, string $offset, string $create_after, string $update_after, string $limit, string $options, string $sku_seller_list)
     {
-        $uri = '/products/get';
+        $uri = 'products/get';
 
         $params = [
             'filter' => $filter,
@@ -252,7 +252,7 @@ class Product extends Api
 
     /**
      * 获取所列出项目的质量控制状态
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/qc/status/get
+     * @document https://open.lazada.com/apps/doc/api?path=/product/qc/status/get
      * @param string $offset
      * @param string $limit
      * @param array $seller_skus
@@ -261,7 +261,7 @@ class Product extends Api
      */
     public function getQcStatus(string $offset, string $limit, array $seller_skus)
     {
-        $uri = '/product/qc/status/get';
+        $uri = 'product/qc/status/get';
 
         $params = [
             'offset' => $offset,
@@ -274,14 +274,14 @@ class Product extends Api
 
     /**
      * 从系统中获取 MigrateImages API 的返回信息
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/image/response/get
+     * @document https://open.lazada.com/apps/doc/api?path=/image/response/get
      * @param string $batch_id
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getResponse(string $batch_id)
     {
-        $uri = '/image/response/get';
+        $uri = 'image/response/get';
 
         $params = [
             'batch_id' => $batch_id
@@ -292,20 +292,20 @@ class Product extends Api
 
     /**
      * 平台将通过该接口提供产品数量限制信息
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/image/response/get
+     * @document https://open.lazada.com/apps/doc/api?path=/image/response/get
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getSellerItemLimit()
     {
-        $uri = '/product/seller/item/limit';
+        $uri = 'product/seller/item/limit';
 
         return $this->get($uri);
     }
 
     /**
      * 获取没有关键属性的产品。（仅限跨境卖家）
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/unfilled/attribute/get
+     * @document https://open.lazada.com/apps/doc/api?path=/product/unfilled/attribute/get
      * @param int $page_index
      * @param string $attribute_tag
      * @param int $page_size
@@ -315,7 +315,7 @@ class Product extends Api
      */
     public function getUnfilledAttributeItem(int $page_index, string $attribute_tag, int $page_size, string $language_code)
     {
-        $uri = '/product/unfilled/attribute/get';
+        $uri = 'product/unfilled/attribute/get';
 
         $params = [
             'page_index' => $page_index,
@@ -328,7 +328,7 @@ class Product extends Api
 
     /**
      * 将产品放入特定的 A/B 测试实验中
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/products/experiment/join
+     * @document https://open.lazada.com/apps/doc/api?path=/products/experiment/join
      * @param string $imageUrl
      * @param string $startDate
      * @param string $endDate
@@ -341,7 +341,7 @@ class Product extends Api
      */
     public function joinExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture)
     {
-        $uri = '/products/experiment/join';
+        $uri = 'products/experiment/join';
 
         $params = [
             'imageUrl' => $imageUrl,
@@ -358,14 +358,14 @@ class Product extends Api
 
     /**
      * 将单个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB。
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/image/migrate
+     * @document https://open.lazada.com/apps/doc/api?path=/image/migrate
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function migrateImage(string $payload)
     {
-        $uri = '/image/migrate';
+        $uri = 'image/migrate';
 
         $params = [
             'payload' => $payload,
@@ -376,14 +376,14 @@ class Product extends Api
 
     /**
      * 将多个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB。一次调用最多可以迁移8张图片。
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/images/migrate
+     * @document https://open.lazada.com/apps/doc/api?path=/images/migrate
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function migrateImages(string $payload)
     {
-        $uri = '/images/migrate';
+        $uri = 'images/migrate';
 
         $params = [
             'payload' => $payload,
@@ -394,7 +394,7 @@ class Product extends Api
 
     /**
      * 查询产品的实验配置
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/products/experiment/getconfig
+     * @document https://open.lazada.com/apps/doc/api?path=/products/experiment/getconfig
      * @param int $productId
      * @param string $venture
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -402,7 +402,7 @@ class Product extends Api
      */
     public function queryProductExperimentConfiguration(int $productId, string $venture)
     {
-        $uri = '/products/experiment/getconfig';
+        $uri = 'products/experiment/getconfig';
 
         $params = [
             'productId' => $productId,
@@ -414,14 +414,14 @@ class Product extends Api
 
     /**
      * 删除现有产品、一种产品中的某些 SKU 或一种产品中的所有 SKU。系统在一个请求中最多支持 50 个 SellerSkus。
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/remove
+     * @document https://open.lazada.com/apps/doc/api?path=/product/remove
      * @param array $seller_sku_list
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function removeProduct(array $seller_sku_list)
     {
-        $uri = '/product/remove';
+        $uri = 'product/remove';
 
         $params = [
             'seller_sku_list' => $seller_sku_list,
@@ -432,14 +432,14 @@ class Product extends Api
 
     /**
      * 通过关联一个或多个图像 URL 来为现有产品设置图像
-     * https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/images/set
+     * https://open.lazada.com/apps/doc/api?path=/images/set
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function setImages(string $payload)
     {
-        $uri = '/images/set';
+        $uri = 'images/set';
 
         $params = [
             'payload' => $payload,
@@ -450,14 +450,14 @@ class Product extends Api
 
     /**
      * 更新一种或多种现有产品的价格和数量。最多可以更新50个产品，但推荐20个
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/price_quantity/update
+     * @document https://open.lazada.com/apps/doc/api?path=/product/price_quantity/update
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function updatePriceQuantity(string $payload)
     {
-        $uri = '/product/price_quantity/update';
+        $uri = 'product/price_quantity/update';
 
         $params = [
             'payload' => $payload,
@@ -468,14 +468,14 @@ class Product extends Api
 
     /**
      * 更新现有产品的属性或 SKU
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/update
+     * @document https://open.lazada.com/apps/doc/api?path=/product/update
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function updateProduct(string $payload)
     {
-        $uri = '/product/update';
+        $uri = 'product/update';
 
         $params = [
             'payload' => $payload,
@@ -486,14 +486,14 @@ class Product extends Api
 
     /**
      * 更新一种或多种现有产品的可销售数量。最多可以更新50个产品，但推荐20个。
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/product/stock/sellable/update
+     * @document https://open.lazada.com/apps/doc/api?path=/product/stock/sellable/update
      * @param string $payload
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function updateSellableQuantity(string $payload)
     {
-        $uri = '/product/stock/sellable/update';
+        $uri = 'product/stock/sellable/update';
 
         $params = [
             'payload' => $payload,
@@ -504,14 +504,14 @@ class Product extends Api
 
     /**
      * 将单个图像文件上传到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=5&path=/image/upload
+     * @document https://open.lazada.com/apps/doc/api?path=/image/upload
      * @param string $image
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function uploadImage(string $image)
     {
-        $uri = '/image/upload';
+        $uri = 'image/upload';
 
         $params = [
             'image' => fopen($image, 'rb')

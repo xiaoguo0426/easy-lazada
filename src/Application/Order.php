@@ -9,14 +9,14 @@ class Order extends Api
 
     /**
      * 获取指定订单详情
-     * @document  https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/get
+     * @document  https://open.lazada.com/apps/doc/api?path=/order/get
      * @param $order_id
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getOrder($order_id)
     {
-        $uri = '/order/get';
+        $uri = 'order/get';
 
         $params = ['order_id' => $order_id];
 
@@ -25,28 +25,28 @@ class Order extends Api
 
     /**
      * 获取多个订单详情
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/orders/get
+     * @document https://open.lazada.com/apps/doc/api?path=/orders/get
      * @param $params
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getOrders($params)
     {
-        $uri = '/orders/get';
+        $uri = 'orders/get';
 
         return $this->get($uri, $params);
     }
 
     /**
      * 获取指定订单商品列表
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/items/get
+     * @document https://open.lazada.com/apps/doc/api?path=/order/items/get
      * @param $order_id
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getOrderItems($order_id)
     {
-        $uri = '/order/items/get';
+        $uri = 'order/items/get';
 
         $params = ['order_id' => $order_id];
 
@@ -55,14 +55,14 @@ class Order extends Api
 
     /**
      * 获取多个订单商品列表
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/orders/items/get
+     * @document https://open.lazada.com/apps/doc/api?path=/orders/items/get
      * @param array $order_ids 订单id集合
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getMultipleOrderItems(array $order_ids)
     {
-        $uri = '/orders/items/get';
+        $uri = 'orders/items/get';
 
         $params = ['order_ids' => $this->array2string($order_ids)];
 
@@ -71,7 +71,7 @@ class Order extends Api
 
     /**
      * 标记订单商品已打包
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/pack
+     * @document https://open.lazada.com/apps/doc/api?path=/order/pack
      * @param string $shipping_provider
      * @param array $order_item_ids
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -79,7 +79,7 @@ class Order extends Api
      */
     public function setStatusToPackedByMarketplace(string $shipping_provider, array $order_item_ids)
     {
-        $uri = '/order/pack';
+        $uri = 'order/pack';
 
         $params = [
             'shipping_provider' => $shipping_provider,
@@ -92,7 +92,7 @@ class Order extends Api
 
     /**
      * 标记订单商品为可以发货
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/rts
+     * @document https://open.lazada.com/apps/doc/api?path=/order/rts
      * @param string $delivery_type
      * @param array $order_item_ids
      * @param string $shipment_provider
@@ -102,7 +102,7 @@ class Order extends Api
      */
     public function setStatusToReadyToShip(string $delivery_type, array $order_item_ids, string $shipment_provider, string $tracking_number)
     {
-        $uri = '/order/rts';
+        $uri = 'order/rts';
 
         $params = [
             'delivery_type' => $delivery_type,
@@ -116,7 +116,7 @@ class Order extends Api
 
     /**
      * 取消单个订单项目
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/cancel
+     * @document https://open.lazada.com/apps/doc/api?path=/order/cancel
      * @param int $order_item_id Order item ID. Mandatory
      * @param int $reason_id ID of the cancel reason.
      * @param string $reason_detail Reason detail. Optional
@@ -125,7 +125,7 @@ class Order extends Api
      */
     public function setStatusToCanceled(int $order_item_id, int $reason_id, string $reason_detail)
     {
-        $uri = '/order/cancel';
+        $uri = 'order/cancel';
 
         $params = [
             'reason_detail' => $reason_detail,
@@ -138,7 +138,7 @@ class Order extends Api
 
     /**
      * 检索与订单相关的文档，包括发票和运输标签
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/document/get
+     * @document https://open.lazada.com/apps/doc/api?path=/order/document/get
      * @param string $doc_type invoice,shippingLabel,carrierManifest
      * @param array $order_item_ids
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -146,7 +146,7 @@ class Order extends Api
      */
     public function getDocument(string $doc_type, array $order_item_ids)
     {
-        $uri = '/order/document/get';
+        $uri = 'order/document/get';
 
         $params = [
             'doc_type' => $doc_type,
@@ -158,14 +158,25 @@ class Order extends Api
 
     /**
      * 检索与订单相关的文档，仅用于运输标签
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/document/awb/html/get
+     * @document https://open.lazada.com/apps/doc/api?path=/order/document/awb/html/get
      * @param array $order_item_ids
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
     public function getAwbDocumentHtml(array $order_item_ids)
     {
-        $uri = '/order/document/awb/html/get';
+        $uri = 'order/document/awb/html/get';
+
+        $params = [
+            'order_item_ids' => $this->array2string($order_item_ids)
+        ];
+
+        return $this->get($uri, $params);
+    }
+
+    public function getAwbDocumentPDF(array $order_item_ids)
+    {
+        $uri = 'order/document/awb/pdf/get';
 
         $params = [
             'order_item_ids' => $this->array2string($order_item_ids)
@@ -176,7 +187,7 @@ class Order extends Api
 
     /**
      * 设置指定订单的发票编号
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=8&path=/order/invoice_number/set
+     * @document https://open.lazada.com/apps/doc/api?path=/order/invoice_number/set
      * @param int $order_item_id
      * @param string $invoice_number
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -184,7 +195,7 @@ class Order extends Api
      */
     public function setInvoiceNumber(int $order_item_id, string $invoice_number)
     {
-        $uri = '/order/invoice_number/set';
+        $uri = 'order/invoice_number/set';
 
         $params = [
             'order_item_id' => $order_item_id,
@@ -192,5 +203,26 @@ class Order extends Api
         ];
 
         return $this->post($uri, $params);
+    }
+
+    /**
+     * 卖家可以通过此API查看订单是否可以取消，如果不能，则获取相应的原因。
+     * @document https://open.lazada.com/apps/doc/api?path=%2Forder%2Freverse%2Fcancel%2Fvalidate
+     * @param string $order_id
+     * @param array $order_item_id_list
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
+     * @return array
+     */
+    public function orderCancelValidate(string $order_id, array $order_item_id_list)
+    {
+        $uri = 'order/reverse/cancel/validate';
+
+        $params = [
+            'order_id' => $order_id,
+            'order_item_id_list' => $order_item_id_list
+        ];
+
+        return $this->get($uri, $params);
     }
 }

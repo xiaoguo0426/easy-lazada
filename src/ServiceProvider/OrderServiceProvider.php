@@ -16,7 +16,7 @@ class OrderServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['order'] = function ($pimple) {
-            return new Order($pimple->access_token);
+            return new Order($pimple->getConfig('region'), $pimple->access_token);
         };
     }
 }
