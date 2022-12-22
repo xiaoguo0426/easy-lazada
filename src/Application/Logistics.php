@@ -8,16 +8,17 @@ class Logistics extends Api
 {
     /**
      * 使用卖家 ID、订单 ID 和区域信息查询卖家 erp 的物流详情
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=6&path=/logistic/order/trace
+     * @document https://open.lazada.com/apps/doc/api?path=/logistic/order/trace
      * @param string $order_id
      * @param string $locale
      * @param array $ofcPackageIdList
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      * @return mixed
      */
     public function getOrderTrace(string $order_id, string $locale, array $ofcPackageIdList)
     {
-        $uri = '/logistic/order/trace';
+        $uri = 'logistic/order/trace';
 
         $params = [
             'order_id' => $order_id,
@@ -30,12 +31,12 @@ class Logistics extends Api
 
     /**
      * 获取所有活跃的运输提供商的列表，在使用 SetStatusToPackedByMarketplace API 时需要此列表
-     * @document https://open.lazada.com/doc/api.htm?spm=a2o9m.11193531.0.0.17216bbeoSj7y1#/api?cid=6&path=/shipment/providers/get
+     * @document https://open.lazada.com/apps/doc/api?path=/shipment/providers/get
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getShipmentProviders()
     {
-        $uri = '/shipment/providers/get';
+        $uri = 'shipment/providers/get';
 
         return $this->get($uri);
     }

@@ -3,37 +3,41 @@
 namespace Onetech\EasyLazada\Oauth;
 
 use Hanson\Foundation\AbstractAccessToken;
+use Hanson\Foundation\Foundation;
 use Onetech\EasyLazada\Exception\AuthorizationException;
 use Onetech\EasyLazada\Exception\TokenException;
 
 class AccessToken extends AbstractAccessToken
 {
+    private string $region;
+    private string $app_key;
+    private string $app_secret;
+    private bool $debug;
+    private bool $sandbox;
 
-    private $app_key;
-    private $app_secret;
-    private $debug;
-    private $sandbox;
-
-    private $code;
+    private string $code;
 
     protected $cacheKey;
-    protected $cacheRefreshKey;
+    protected string $cacheRefreshKey;
 
-    public function __construct($app_key, $app_secret, $debug = false, $sandbox = false)
+    public function __construct(Foundation $app)
     {
-        $this->app_key = $app_key;
-        $this->app_secret = $app_secret;
-        $this->debug = $debug;
-        $this->sandbox = $sandbox;
+        $this->region = $app->getConfig('region') ?? '';
+        $this->app_key = $app->getConfig('app_key') ?? '';
+        $this->app_secret = $app->getConfig('app_secret') ?? '';
+        $this->debug = $app->getConfig('debug') ?? false;
+        $this->sandbox = $app->getConfig('sandbox') ?? false;
 
         $this->tokenJsonKey = 'access_token';
         $this->expiresJsonKey = 'expires_in';
 
-        $this->cacheKey = 'lza-access::' . $app_key . '::';
-        $this->cacheRefreshKey = 'lza-refresh-access::' . $app_key . '::';
+        $this->cacheKey = 'lza-access::' . $this->app_key . '::';
+        $this->cacheRefreshKey = 'lza-refresh-access::' . $this->app_key . '::';
 
-        $this->setAppId($app_key);
-        $this->setSecret($app_secret);
+        $this->setAppId($this->app_key);
+        $this->setSecret($this->app_secret);
+
+        parent::__construct($app);
     }
 
     public function getDebug()
@@ -55,11 +59,12 @@ class AccessToken extends AbstractAccessToken
 
     /**
      * 用code交换access_token
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @return mixed
      */
-    public function getTokenFromServer()
+    public function getTokenFromServer(): array
     {
-        return (new Api($this->app_key, $this->app_secret, $this->debug, $this->sandbox))->post('/auth/token/create', [
+        return (new Api($this->region, $this->app_key, $this->app_secret, $this->debug, $this->sandbox))->post('/auth/token/create', [
             'code' => $this->code
         ]);
     }
@@ -77,7 +82,7 @@ class AccessToken extends AbstractAccessToken
         $this->setRefreshToken($result);
     }
 
-    private function getCacheRefreshKey()
+    private function getCacheRefreshKey(): string
     {
         return $this->cacheRefreshKey . $this->appId;
     }
@@ -98,8 +103,10 @@ class AccessToken extends AbstractAccessToken
     /**
      * 使用refresh_token去刷新access_token
      * @param string $refresh_token
-     * @throws TokenException
      * @throws AuthorizationException
+     * @throws TokenException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return string
      */
     public function refresh(string $refresh_token = ''): string
     {
@@ -112,7 +119,7 @@ class AccessToken extends AbstractAccessToken
             }
         }
 
-        $response = (new Api($this->app_key, $this->app_secret, $this->debug, $this->sandbox))->post('/auth/token/refresh', [
+        $response = (new Api($this->region, $this->app_key, $this->app_secret, $this->debug, $this->sandbox))->post('/auth/token/refresh', [
             'refresh_token' => $refresh_token
         ]);
 

@@ -23,11 +23,10 @@ class Oauth
      */
 
     /**
-     * ContainerAccess constructor.
-     *
-     * @param Lazada|Container $container
+     * Oauth constructor.
+     * @param Container $container
      */
-    public function __construct(Lazada $container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }
