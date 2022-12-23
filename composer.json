@@ -6,7 +6,8 @@
         "hanson/foundation-sdk": "5.0.*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "ext-redis": "*"
     },
     "autoload": {
         "psr-4": {

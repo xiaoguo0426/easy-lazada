@@ -31,11 +31,13 @@ class AccessToken extends AbstractAccessToken
         $this->tokenJsonKey = 'access_token';
         $this->expiresJsonKey = 'expires_in';
 
-        $this->cacheKey = 'lza-access::' . $this->app_key . '::';
-        $this->cacheRefreshKey = 'lza-refresh-access::' . $this->app_key . '::';
+        $this->cacheKey = 'lza-access::' . $this->app_key;
+        $this->cacheRefreshKey = 'lza-refresh-access::' . $this->app_key;
 
         $this->setAppId($this->app_key);
         $this->setSecret($this->app_secret);
+
+        $this->setCache($app->getConfig('cache'));
 
         parent::__construct($app);
     }
@@ -84,7 +86,7 @@ class AccessToken extends AbstractAccessToken
 
     private function getCacheRefreshKey(): string
     {
-        return $this->cacheRefreshKey . $this->appId;
+        return $this->cacheRefreshKey;
     }
 
     public function setRefreshToken($result)
