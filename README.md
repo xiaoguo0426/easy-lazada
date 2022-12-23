@@ -2,7 +2,6 @@
 
 <p align="center"> .</p>
 
-
 ## Installing
 
 使用之前，请认真阅读ladaza API 文档
@@ -20,6 +19,7 @@ use Onetech\EasyLazada\Lazada;
 require 'vendor/autoload.php';
 
 $lazada = new Lazada([
+    'region' => 'TH',
     'app_key' => '',
     'app_secret' => '',
     'redirect_uri' => 'https://admin.erp.local',
@@ -57,7 +57,6 @@ $res = $lazada->order->getOrder($order_id);
 2. 上传图片的API还没有对接成功
 3. 其他未知问题
 
-
 ## Contributing
 
 You can contribute in one of three ways:
@@ -66,7 +65,8 @@ You can contribute in one of three ways:
 2. Answer questions or fix bugs on the [issue tracker](https://github.com/onetech/easy-lazada/issues).
 3. Contribute new features or update the wiki.
 
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and
+PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
 
 ## License
 

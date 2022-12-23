@@ -2,13 +2,14 @@
 
 use Onetech\EasyLazada\Lazada;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $lazada = new Lazada([
-    'app_key' => '107684',
-    'app_secret' => 'Hr2EAPgMKD0inFXrhXnyXry0cdwHQLL9',
-    'redirect_uri' => 'https://admin.erp.local',
-    'debug' => false,
+    'region' => 'th',
+    'app_key' => '',
+    'app_secret' => '',
+    'redirect_uri' => 'https://backend.erp.local/lazada/callback',
+    'debug' => true,
     'sandbox' => true,
     'log' => [
         'name' => 'foundation',
@@ -22,17 +23,20 @@ $lazada = new Lazada([
 //$order_id = '';
 //$res = $lazada->order->getOrder(279438600134006);
 
-//try {
-//    $res = $lazada->order->getOrders([
-//        'created_after' => '2022-03-10T09:00:00+08:00',
-//        'update_after' => '2022-03-17T09:00:00+08:00',
-////        'status' => 'unpaid'
-//    ]);
-//} catch (\GuzzleHttp\Exception\GuzzleException $e) {
-//}
+try {
+    $res = $lazada->order->getOrders([
+        'created_after' => '2022-03-10T09:00:00+08:00',
+        'update_after' => '2022-03-17T09:00:00+08:00',
+        'limit' => 5,
+        'status' => 'returned'// unpaid未支付, pending待处理, canceled取消, ready_to_ship待交付物流, delivered妥投, returned退回, shipped运输在途, failed失败, topack打包,toship待交付物流,shipping运输在途 and lost丢失
+    ]);
+    var_dump($res);
+} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    var_dump($e->getMessage());
+}
 
 //try {
-//    $res = $lazada->order->getOrderItems(279438600134006);
+//    $res = $lazada->order->getOrderItems(623246300764242);
 //} catch (\GuzzleHttp\Exception\GuzzleException $e) {
 //}
 //
@@ -84,7 +88,14 @@ $orderItems = [
 //}
 //
 //try {
-//    $res = $lazada->order->getAwbDocumentHtml([279430200264014]);
+//    $res = $lazada->order->getAwbDocumentHtml([532417706064242]);
+//    var_dump($res);
+//} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+//    var_dump($e->getMessage());
+//}
+//
+//try {
+//    $res = $lazada->order->getAwbDocumentPDF([532417706064242]);
 //    var_dump($res);
 //} catch (\GuzzleHttp\Exception\GuzzleException $e) {
 //    var_dump($e->getMessage());

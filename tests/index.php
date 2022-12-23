@@ -2,11 +2,11 @@
 
 use Onetech\EasyLazada\Lazada;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $lazada = new Lazada([
-    'app_key' => '107684',
-    'app_secret' => 'Hr2EAPgMKD0inFXrhXnyXry0cdwHQLL9',
+    'app_key' => '',
+    'app_secret' => '',
     'debug' => true,
     'sandbox' => true,
     'log' => [
@@ -18,8 +18,8 @@ $lazada = new Lazada([
     'cache' => new Doctrine\Common\Cache\FilesystemCache(sys_get_temp_dir())
 ]);
 
-$res = $lazada->order->getOrder(10086);
-var_dump($res);
+//$res = $lazada->order->getOrder(10086);
+//var_dump($res);
 
 //$eleme = new Eleme([
 //    'app_id' => '',
