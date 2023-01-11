@@ -146,9 +146,9 @@ class AccessToken extends AbstractAccessToken
         return $this->getCache()->delete($this->getCacheRefreshKey());
     }
 
-    public function tokenStats(): ?array
+    public function checkToken(): bool
     {
-        return $this->getCache()->getStats();
+        return (bool) $this->getCache()->fetch($this->getCacheKey());
     }
 
 }
