@@ -28,6 +28,7 @@ class Order extends Api
      * @document https://open.lazada.com/apps/doc/api?path=/orders/get
      * @param $params
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      * @return mixed
      */
     public function getOrders($params)

@@ -2,9 +2,11 @@
 
 namespace Onetech\EasyLazada\Oauth;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Hanson\Foundation\AbstractAccessToken;
 use Hanson\Foundation\Foundation;
 use Onetech\EasyLazada\Exception\AuthorizationException;
+use Onetech\EasyLazada\Exception\InvalidArgumentException;
 use Onetech\EasyLazada\Exception\TokenException;
 
 class AccessToken extends AbstractAccessToken
@@ -60,8 +62,42 @@ class AccessToken extends AbstractAccessToken
     }
 
     /**
+     * 获取token
+     * @param false $forceRefresh
+     * @throws AuthorizationException
+     * @throws InvalidArgumentException
+     * @throws TokenException
+     * @throws GuzzleException
+     * @return string|null
+     */
+    public function getToken($forceRefresh = false): ?string
+    {
+        if (true === $forceRefresh) {
+            $result = $this->getTokenFromServer();
+            $this->checkTokenResponse($result);
+
+            $this->setToken(
+                $token = $result[$this->tokenJsonKey],
+                $this->expiresJsonKey ? $result[$this->expiresJsonKey] : null
+            );
+
+            return $token;
+        }
+
+        if (false === $forceRefresh) {
+            $token = $this->getCache()->fetch($this->getCacheKey());
+            if (empty($token)) {
+                throw new TokenException("access_token doesn't exist");
+            }
+            return $token;
+        }
+
+        throw new InvalidArgumentException('Invalid Argument');
+    }
+
+    /**
      * 用code交换access_token
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      * @return mixed
      */
     public function getTokenFromServer(): array
@@ -107,7 +143,7 @@ class AccessToken extends AbstractAccessToken
      * @param string $refresh_token
      * @throws AuthorizationException
      * @throws TokenException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      * @return string
      */
     public function refresh(string $refresh_token = ''): string
