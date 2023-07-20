@@ -16,7 +16,7 @@ class LogisticsServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['logistics'] = function ($pimple) {
-            return new Logistics($pimple->access_token);
+            return new Logistics($pimple->getConfig('region'), $pimple->access_token);
         };
     }
 }

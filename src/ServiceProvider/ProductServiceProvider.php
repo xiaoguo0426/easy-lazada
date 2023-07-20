@@ -16,7 +16,7 @@ class ProductServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['product'] = function ($pimple) {
-            return new Product($pimple->access_token);
+            return new Product($pimple->getConfig('region'), $pimple->access_token);
         };
     }
 }

@@ -16,7 +16,7 @@ class SellerServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['seller'] = function ($pimple) {
-            return new Seller($pimple->access_token);
+            return new Seller($pimple->getConfig('region'), $pimple->access_token);
         };
     }
 }

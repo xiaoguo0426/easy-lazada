@@ -2,6 +2,8 @@
 
 namespace Onetech\EasyLazada\Application;
 
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Onetech\EasyLazada\Core\Api;
 
 class Logistics extends Api
@@ -12,11 +14,11 @@ class Logistics extends Api
      * @param string $order_id
      * @param string $locale
      * @param array $ofcPackageIdList
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \JsonException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getOrderTrace(string $order_id, string $locale, array $ofcPackageIdList)
+    public function getOrderTrace(string $order_id, string $locale, array $ofcPackageIdList): array
     {
         $uri = 'logistic/order/trace';
 
@@ -32,9 +34,11 @@ class Logistics extends Api
     /**
      * 获取所有活跃的运输提供商的列表，在使用 SetStatusToPackedByMarketplace API 时需要此列表
      * @document https://open.lazada.com/apps/doc/api?path=/shipment/providers/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getShipmentProviders()
+    public function getShipmentProviders(): array
     {
         $uri = 'shipment/providers/get';
 

@@ -2,6 +2,8 @@
 
 namespace Onetech\EasyLazada\Application;
 
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Onetech\EasyLazada\Core\Api;
 
 class Product extends Api
@@ -10,10 +12,11 @@ class Product extends Api
      * 增加或减少一种或多种现有产品的可销售数量
      * @document https://open.lazada.com/apps/doc/api?path=/product/stock/sellable/adjust
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function adjustSellableQuantity(string $payload)
+    public function adjustSellableQuantity(string $payload): array
     {
         $uri = 'product/stock/sellable/adjust';
 
@@ -28,10 +31,11 @@ class Product extends Api
      * 创建单个新产品
      * @document https://open.lazada.com/apps/doc/api?path=/product/create
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function createProduct(string $payload)
+    public function createProduct(string $payload): array
     {
         $uri = 'product/create';
 
@@ -45,10 +49,11 @@ class Product extends Api
     /**
      * 停用产品或产品对应的 SKU
      * @document https://open.lazada.com/apps/doc/api?path=/product/deactivate
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function deactivateProduct(string $apiRequestBody)
+    public function deactivateProduct(string $apiRequestBody): array
     {
         $uri = 'product/deactivate';
 
@@ -69,10 +74,11 @@ class Product extends Api
      * @param int $sellerId
      * @param string $expType
      * @param string $venture
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function exitExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture)
+    public function exitExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture): array
     {
         $uri = 'products/experiment/exit';
 
@@ -99,10 +105,11 @@ class Product extends Api
      * @param string $imageUrl
      * @param string $startDate
      * @param string $endDate
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getImageExperimentData(int $productId, int $sellerId, string $expType, string $venture, string $imageUrl, string $startDate, string $endDate)
+    public function getImageExperimentData(int $productId, int $sellerId, string $expType, string $venture, string $imageUrl, string $startDate, string $endDate): array
     {
         $uri = 'products/experiment/getdata';
 
@@ -125,10 +132,11 @@ class Product extends Api
      * @param string $startRow
      * @param string $pageSize
      * @param string $languageCode
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getBrandByPages(string $startRow, string $pageSize, string $languageCode)
+    public function getBrandByPages(string $startRow, string $pageSize, string $languageCode): array
     {
         $uri = 'category/brands/query';
 
@@ -146,10 +154,11 @@ class Product extends Api
      * @document https://open.lazada.com/apps/doc/api?path=/category/attributes/get
      * @param string $primary_category_id
      * @param string $language_code
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getCategoryAttributes(string $primary_category_id, string $language_code)
+    public function getCategoryAttributes(string $primary_category_id, string $language_code): array
     {
         $uri = 'category/attributes/get';
 
@@ -165,10 +174,11 @@ class Product extends Api
      * 通过产品标题获取产品的类别建议
      * @document https://open.lazada.com/apps/doc/api?path=/product/category/suggestion/get
      * @param string $product_name
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getCategorySuggestion(string $product_name)
+    public function getCategorySuggestion(string $product_name): array
     {
         $uri = 'product/category/suggestion/get';
 
@@ -182,10 +192,11 @@ class Product extends Api
     /**
      * 检索系统中所有产品类别的列表
      * @param string $language_code
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getCategoryTree(string $language_code)
+    public function getCategoryTree(string $language_code): array
     {
         $uri = 'category/tree/get';
 
@@ -201,10 +212,11 @@ class Product extends Api
      * @document https://open.lazada.com/apps/doc/api?path=/product/item/get
      * @param string $item_id
      * @param string $seller_sku
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getProductItem(string $item_id, string $seller_sku)
+    public function getProductItem(string $item_id, string $seller_sku): array
     {
         $uri = 'product/item/get';
 
@@ -228,10 +240,11 @@ class Product extends Api
      * @param string $limit
      * @param string $options
      * @param string $sku_seller_list
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getProducts(string $filter, string $update_before, string $create_before, string $offset, string $create_after, string $update_after, string $limit, string $options, string $sku_seller_list)
+    public function getProducts(string $filter, string $update_before, string $create_before, string $offset, string $create_after, string $update_after, string $limit, string $options, string $sku_seller_list): array
     {
         $uri = 'products/get';
 
@@ -256,10 +269,11 @@ class Product extends Api
      * @param string $offset
      * @param string $limit
      * @param array $seller_skus
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getQcStatus(string $offset, string $limit, array $seller_skus)
+    public function getQcStatus(string $offset, string $limit, array $seller_skus): array
     {
         $uri = 'product/qc/status/get';
 
@@ -276,10 +290,11 @@ class Product extends Api
      * 从系统中获取 MigrateImages API 的返回信息
      * @document https://open.lazada.com/apps/doc/api?path=/image/response/get
      * @param string $batch_id
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getResponse(string $batch_id)
+    public function getResponse(string $batch_id): array
     {
         $uri = 'image/response/get';
 
@@ -293,10 +308,11 @@ class Product extends Api
     /**
      * 平台将通过该接口提供产品数量限制信息
      * @document https://open.lazada.com/apps/doc/api?path=/image/response/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getSellerItemLimit()
+    public function getSellerItemLimit(): array
     {
         $uri = 'product/seller/item/limit';
 
@@ -310,10 +326,11 @@ class Product extends Api
      * @param string $attribute_tag
      * @param int $page_size
      * @param string $language_code
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getUnfilledAttributeItem(int $page_index, string $attribute_tag, int $page_size, string $language_code)
+    public function getUnfilledAttributeItem(int $page_index, string $attribute_tag, int $page_size, string $language_code): array
     {
         $uri = 'product/unfilled/attribute/get';
 
@@ -336,10 +353,11 @@ class Product extends Api
      * @param int $sellerId
      * @param string $expType
      * @param string $venture
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function joinExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture)
+    public function joinExperiment(string $imageUrl, string $startDate, string $endDate, int $productId, int $sellerId, string $expType, string $venture): array
     {
         $uri = 'products/experiment/join';
 
@@ -357,13 +375,14 @@ class Product extends Api
     }
 
     /**
-     * 将单个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB。
+     * 将单个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG.图像文件的最大大小为 1MB。
      * @document https://open.lazada.com/apps/doc/api?path=/image/migrate
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function migrateImage(string $payload)
+    public function migrateImage(string $payload): array
     {
         $uri = 'image/migrate';
 
@@ -375,13 +394,14 @@ class Product extends Api
     }
 
     /**
-     * 将多个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB。一次调用最多可以迁移8张图片。
+     * 将多个图像从外部站点迁移到 Lazada 站点。允许的图像格式为 JPG 和 PNG.图像文件的最大大小为 1MB。一次调用最多可以迁移8张图片。
      * @document https://open.lazada.com/apps/doc/api?path=/images/migrate
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function migrateImages(string $payload)
+    public function migrateImages(string $payload): array
     {
         $uri = 'images/migrate';
 
@@ -397,10 +417,11 @@ class Product extends Api
      * @document https://open.lazada.com/apps/doc/api?path=/products/experiment/getconfig
      * @param int $productId
      * @param string $venture
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function queryProductExperimentConfiguration(int $productId, string $venture)
+    public function queryProductExperimentConfiguration(int $productId, string $venture): array
     {
         $uri = 'products/experiment/getconfig';
 
@@ -413,13 +434,14 @@ class Product extends Api
     }
 
     /**
-     * 删除现有产品、一种产品中的某些 SKU 或一种产品中的所有 SKU。系统在一个请求中最多支持 50 个 SellerSkus。
+     * 删除现有产品、一种产品中的某些 SKU 或一种产品中的所有 SKU.系统在一个请求中最多支持 50 个 SellerSkus。
      * @document https://open.lazada.com/apps/doc/api?path=/product/remove
      * @param array $seller_sku_list
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function removeProduct(array $seller_sku_list)
+    public function removeProduct(array $seller_sku_list): array
     {
         $uri = 'product/remove';
 
@@ -434,10 +456,11 @@ class Product extends Api
      * 通过关联一个或多个图像 URL 来为现有产品设置图像
      * https://open.lazada.com/apps/doc/api?path=/images/set
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function setImages(string $payload)
+    public function setImages(string $payload): array
     {
         $uri = 'images/set';
 
@@ -452,10 +475,11 @@ class Product extends Api
      * 更新一种或多种现有产品的价格和数量。最多可以更新50个产品，但推荐20个
      * @document https://open.lazada.com/apps/doc/api?path=/product/price_quantity/update
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function updatePriceQuantity(string $payload)
+    public function updatePriceQuantity(string $payload): array
     {
         $uri = 'product/price_quantity/update';
 
@@ -470,10 +494,11 @@ class Product extends Api
      * 更新现有产品的属性或 SKU
      * @document https://open.lazada.com/apps/doc/api?path=/product/update
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function updateProduct(string $payload)
+    public function updateProduct(string $payload): array
     {
         $uri = 'product/update';
 
@@ -488,10 +513,11 @@ class Product extends Api
      * 更新一种或多种现有产品的可销售数量。最多可以更新50个产品，但推荐20个。
      * @document https://open.lazada.com/apps/doc/api?path=/product/stock/sellable/update
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function updateSellableQuantity(string $payload)
+    public function updateSellableQuantity(string $payload): array
     {
         $uri = 'product/stock/sellable/update';
 
@@ -503,13 +529,14 @@ class Product extends Api
     }
 
     /**
-     * 将单个图像文件上传到 Lazada 站点。允许的图像格式为 JPG 和 PNG。图像文件的最大大小为 1MB
+     * 将单个图像文件上传到 Lazada 站点。允许的图像格式为 JPG 和 PNG.图像文件的最大大小为 1MB
      * @document https://open.lazada.com/apps/doc/api?path=/image/upload
      * @param string $image
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function uploadImage(string $image)
+    public function uploadImage(string $image): array
     {
         $uri = 'image/upload';
 

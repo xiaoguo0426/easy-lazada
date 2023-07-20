@@ -33,9 +33,6 @@ class AccessToken extends AbstractAccessToken
         $this->tokenJsonKey = 'access_token';
         $this->expiresJsonKey = 'expires_in';
 
-        $this->cacheKey = 'lza-access::' . $this->app_key . '::' . $this->region;
-        $this->cacheRefreshKey = 'lza-refresh-access::' . $this->app_key . '::' . $this->region;
-
         $this->setAppId($this->app_key);
         $this->setSecret($this->app_secret);
 
@@ -54,7 +51,7 @@ class AccessToken extends AbstractAccessToken
         return $this->sandbox;
     }
 
-    public function setCode($code)
+    public function setCode($code): self
     {
         $this->code = $code;
 
@@ -74,6 +71,7 @@ class AccessToken extends AbstractAccessToken
     {
         if (true === $forceRefresh) {
             $result = $this->getTokenFromServer();
+
             $this->checkTokenResponse($result);
 
             $this->setToken(
@@ -117,20 +115,25 @@ class AccessToken extends AbstractAccessToken
             throw new AuthorizationException($result['message']);
         }
 
+        $this->region = $result['country'];//重置region
+
         $this->setRefreshToken($result);
+    }
+
+    public function getCacheKey(): string
+    {
+        return 'lza-access::' . $this->app_key . '::' . $this->region;
     }
 
     private function getCacheRefreshKey(): string
     {
-        return $this->cacheRefreshKey;
+        return 'lza-refresh-access::' . $this->app_key . '::' . $this->region;
     }
 
-    public function setRefreshToken($result)
+    public function setRefreshToken($result): void
     {
         $refresh_token = $result['refresh_token'];
         $this->getCache()->save($this->getCacheRefreshKey(), $refresh_token, $result['refresh_expires_in']);
-
-        return $this;
     }
 
     public function getRefreshToken(): string

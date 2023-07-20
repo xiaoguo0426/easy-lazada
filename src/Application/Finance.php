@@ -2,6 +2,8 @@
 
 namespace Onetech\EasyLazada\Application;
 
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Onetech\EasyLazada\Core\Api;
 
 class Finance extends Api
@@ -10,10 +12,11 @@ class Finance extends Api
      * 在提供的日期之后创建您的交易报表
      * @document https://open.lazada.com/apps/doc/api?path=/finance/payout/status/get
      * @param string $created_after
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getPayoutStatus(string $created_after)
+    public function getPayoutStatus(string $created_after): array
     {
         $uri = 'finance/payout/status/get';
 
@@ -30,11 +33,11 @@ class Finance extends Api
      * @param string $trans_type
      * @param string $limit
      * @param string $offset
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \JsonException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getTransactionDetails(string $start_time, string $end_time, string $trans_type, string $limit, string $offset)
+    public function getTransactionDetails(string $start_time, string $end_time, string $trans_type, string $limit, string $offset): array
     {
         $uri = 'finance/transaction/detail/get';
 
@@ -57,11 +60,11 @@ class Finance extends Api
      * @param string $trade_order_id
      * @param string $limit
      * @param string $offset
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \JsonException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function queryTransactionDetails(string $start_time, string $end_time, string $trade_order_line_id, string $trans_type, string $trade_order_id, string $limit, string $offset)
+    public function queryTransactionDetails(string $start_time, string $end_time, string $trade_order_line_id, string $trans_type, string $trade_order_id, string $limit, string $offset): array
     {
         $uri = 'finance/transaction/details/get';
 

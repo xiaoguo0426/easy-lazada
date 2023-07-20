@@ -2,6 +2,8 @@
 
 namespace Onetech\EasyLazada\Application;
 
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Onetech\EasyLazada\Core\Api;
 
 class Seller extends Api
@@ -10,10 +12,11 @@ class Seller extends Api
      * 查询这些客户是否关注该卖家
      * @document https://open.lazada.com/apps/doc/api?path=/shop/follow/status/batch/query
      * @param array $buyer_ids
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function batchQueryFollowStatus(array $buyer_ids)
+    public function batchQueryFollowStatus(array $buyer_ids): array
     {
         $uri = 'shop/follow/status/batch/query';
 
@@ -28,10 +31,11 @@ class Seller extends Api
      * 提供特定卖家的卖家多仓库地址数据，如仓库代码、仓库名称等
      * @document https://open.lazada.com/apps/doc/api?path=/seller/warehouse/get
      * @param array $addressTypes
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getMultiWarehouseBySeller(array $addressTypes)
+    public function getMultiWarehouseBySeller(array $addressTypes): array
     {
         $uri = 'seller/warehouse/get';
 
@@ -45,10 +49,11 @@ class Seller extends Api
     /**
      * 返回所请求卖家的提货商店信息列表
      * @document https://open.lazada.com/apps/doc/api?path=/rc/store/list/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getPickUpStoreList()
+    public function getPickUpStoreList(): array
     {
         $uri = 'rc/store/list/get';
 
@@ -58,10 +63,11 @@ class Seller extends Api
     /**
      * 通过当前卖家 ID 获取卖家信息
      * @document https://open.lazada.com/apps/doc/api?path=/seller/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getSeller()
+    public function getSeller(): array
     {
         $uri = 'seller/get';
 
@@ -71,10 +77,11 @@ class Seller extends Api
     /**
      * 提供特定卖家的卖家指标数据，如卖家好评、准时发货率等
      * @document https://open.lazada.com/apps/doc/api?path=/seller/metrics/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getSellerMetricsById()
+    public function getSellerMetricsById(): array
     {
         $uri = 'seller/metrics/get';
 
@@ -85,10 +92,11 @@ class Seller extends Api
      * 提供当前卖家的绩效指标，例如卖家好评、准时发货等
      * @document https://open.lazada.com/apps/doc/api?path=/seller/performance/get
      * @param string $language
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getSellerPerformance(string $language = 'en-US')
+    public function getSellerPerformance(string $language = 'en-US'): array
     {
         $uri = 'seller/performance/get';
 
@@ -104,10 +112,11 @@ class Seller extends Api
      * https://open.lazada.com/apps/doc/api?path=/seller/policy/fetch
      * @param string $venture
      * @param string $locale
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getSellerPolicyFetch(string $venture, string $locale)
+    public function getSellerPolicyFetch(string $venture, string $locale): array
     {
         $uri = 'seller/policy/fetch';
 
@@ -122,10 +131,11 @@ class Seller extends Api
     /**
      * 使用此 API 更新拨打电话的卖家的电子邮件地址
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function updateSeller(string $payload)
+    public function updateSeller(string $payload): array
     {
         $uri = 'seller/update';
 
@@ -140,10 +150,11 @@ class Seller extends Api
      * 更新卖家账户下用户的电子邮件地址
      * @document https://open.lazada.com/apps/doc/api?path=/user/update
      * @param string $payload
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function updateUser(string $payload)
+    public function updateUser(string $payload): array
     {
         $uri = 'seller/update';
 
@@ -157,10 +168,11 @@ class Seller extends Api
     /**
      * 通过卖家id获取仓库
      * @document https://open.lazada.com/apps/doc/api?path=/rc/warehouse/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function getWarehouseBySellerId()
+    public function getWarehouseBySellerId(): array
     {
         $uri = 'rc/warehouse/get';
 
@@ -170,10 +182,11 @@ class Seller extends Api
     /**
      * 根据卖家id查询仓库详细信息
      * @document https://open.lazada.com/apps/doc/api?path=/rc/warehouse/detail/get
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @return mixed
+     * @throws GuzzleException
+     * @throws JsonException
+     * @return array
      */
-    public function queryWarehouseDetailInfoBySellerId()
+    public function queryWarehouseDetailInfoBySellerId(): array
     {
         $uri = 'rc/warehouse/detail/get';
 
