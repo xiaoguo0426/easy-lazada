@@ -3,6 +3,7 @@
 namespace Onetech\EasyLazada\Application;
 
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Pool;
 use JsonException;
 use Onetech\EasyLazada\Core\Api;
 
@@ -56,6 +57,24 @@ class Order extends Api
         $params = ['order_id' => $order_id];
 
         return $this->get($uri, $params);
+    }
+
+    /**
+     * @param int[] $order_ids
+     * @param callable $func
+     */
+    public function getOrdersItemsAsync(array $order_ids, callable $func)
+    {
+        $uri = 'order/items/get';
+
+        $requests = [];
+        foreach ($order_ids as $order_id) {
+            $params = ['order_id' => $order_id];
+
+            $requests[] = $this->getAsync($uri, $params);
+        }
+
+        $this->promise($requests, $func);
     }
 
     /**
